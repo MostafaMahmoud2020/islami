@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:islami_application/ahadeth_model.dart';
 import 'package:islami_application/myThemeData.dart';
-import 'package:islami_application/tabs/ahadeth_screen.dart';
+import 'package:islami_application/ahadeth_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AhadethTab extends StatelessWidget {
   @override
@@ -18,7 +19,7 @@ class AhadethTab extends StatelessWidget {
             color: MyThemeData.primaryColor,
           ),
           Text(
-            "الاحاديث",
+            AppLocalizations.of(context)!.ahadeth,
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium

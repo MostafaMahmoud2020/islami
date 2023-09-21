@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_application/myThemeData.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SebhaTab extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _SebhaTabState extends State<SebhaTab> {
             ),
           ),
           SizedBox(height: 20),
-          Text("عدد التسبيحات",
+          Text(AppLocalizations.of(context)!.tasbehatCount,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium
