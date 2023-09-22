@@ -16,9 +16,11 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as SuraModel;
+
     if (verses.isEmpty) {
       loadFile(args.index);
     }
+
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(

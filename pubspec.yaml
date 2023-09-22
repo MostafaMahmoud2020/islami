@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/images/
     - assets/files/
+    - assets/files/sura_details/
 
   #   - images/a_dot_ham.jpeg
 
