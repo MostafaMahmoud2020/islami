@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_application/myThemeData.dart';
 
 class SettingsTab extends StatefulWidget {
@@ -15,7 +16,7 @@ class _SettingsTabState extends State<SettingsTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Language",
+            AppLocalizations.of(context)!.language,
             style: Theme.of(context)
                 ?.textTheme
                 .bodyMedium
@@ -54,7 +55,7 @@ class _SettingsTabState extends State<SettingsTab> {
             height: 25,
           ),
           Text(
-            "Themeing",
+            AppLocalizations.of(context)!.appearance,
             style: Theme.of(context)
                 ?.textTheme
                 .bodyMedium

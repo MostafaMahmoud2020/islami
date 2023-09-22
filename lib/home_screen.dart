@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_application/myThemeData.dart';
 import 'package:islami_application/tabs/ahadeth_tab.dart';
 import 'package:islami_application/tabs/quran_tab.dart';
@@ -32,7 +32,7 @@ class _homeScreenState extends State<homeScreen> {
                 //________________ using a package called google_fonts __________________
                 // Text("islami", style:GoogleFonts.elMessiri(fontSize: 30,color: Color(0xFF242424))),
 
-                Text("islami",
+            Text(AppLocalizations.of(context)!.appTitle,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge

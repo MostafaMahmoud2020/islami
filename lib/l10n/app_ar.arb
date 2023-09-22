@@ -3,5 +3,7 @@
   "suraNames": "أسماء السور",
   "ahadeth": "الأحاديث",
   "tasbehatCount": "عدد التسبيحات",
-  "radioTitle": "إذاعة القرآن الكريم"
+  "radioTitle": "إذاعة القرآن الكريم",
+  "language": "اللغة",
+  "appearance": "المظهر"
 }

@@ -3,5 +3,7 @@
   "suraNames": "Sura Names",
   "ahadeth": "Al Ahadeth",
   "tasbehatCount": "Tasbehat count",
-  "radioTitle": "Holy Quran Station"
+  "radioTitle": "Holy Quran Station",
+  "language": "Language",
+  "appearance": "Appearance"
 }
