@@ -3,22 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:islami_application/ahadeth_model.dart';
 import 'package:islami_application/myThemeData.dart';
 
-class AhadethScreen extends StatefulWidget {
+class AhadethScreen extends StatelessWidget {
   static const String routeName = "AhadethScreen";
-
-  @override
-  State<AhadethScreen> createState() => _AhadethScreenState();
-}
-
-class _AhadethScreenState extends State<AhadethScreen> {
-  List<String> verses = [];
 
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as AhadethModel;
-    if (verses.isEmpty) {
-      loadFile(args.index);
-    }
 
     return Stack(
       children: [
@@ -38,7 +28,8 @@ class _AhadethScreenState extends State<AhadethScreen> {
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       return Text(
-                        verses[index],
+                        "${args.content[index]} (${index + 1})",
+                        textDirection: TextDirection.rtl,
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       );
@@ -48,20 +39,12 @@ class _AhadethScreenState extends State<AhadethScreen> {
                         thickness: 2,
                         endIndent: 30,
                         indent: 30),
-                    itemCount: verses.length),
+                    itemCount: args.content.length),
               ),
             ),
           ),
         ),
       ],
     );
-  }
-
-  loadFile(int index) async {
-    String file = await rootBundle
-        .loadString("assets/files/ahadeth_details/h${index + 1}.txt");
-    List<String> lines = file.split("\n");
-    verses = lines;
-    setState(() {});
   }
 }

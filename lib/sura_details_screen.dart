@@ -44,7 +44,8 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                     indent: 30),
                 itemBuilder: (context, index) {
                   return Text(
-                    verses[index],
+                    "${verses[index]} (${index + 1})",
+                    textDirection: TextDirection.rtl,
                     style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,
                   );

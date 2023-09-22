@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:islami_application/myThemeData.dart';
 import 'package:islami_application/sura_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../sura_details_screen.dart';
 
 class QuranTab extends StatelessWidget {
