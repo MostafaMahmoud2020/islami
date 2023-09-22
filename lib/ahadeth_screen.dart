@@ -15,7 +15,12 @@ class AhadethScreen extends StatelessWidget {
         Image.asset("assets/images/background.png",
             fit: BoxFit.cover, width: double.infinity),
         Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Text(
+              args.title,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
