@@ -35,9 +35,9 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
           elevation: 50,
           shape: RoundedRectangleBorder(
               side: BorderSide(width: 1, color: MyThemeData.primaryColor),
-              borderRadius: BorderRadius.all(Radius.circular(15))),
+              borderRadius: const BorderRadius.all(Radius.circular(15))),
           child: Padding(
-            padding: EdgeInsets.all(9),
+            padding: const EdgeInsets.all(9),
             child: ListView.separated(
                 separatorBuilder: (context, index) => Divider(
                     color: MyThemeData.primaryColor,

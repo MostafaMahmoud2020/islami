@@ -7,7 +7,7 @@ class MyThemeData {
   static Color blackColor = Color(0xFF242424);
 
   static ThemeData lightTheme = ThemeData(
-      iconTheme: IconThemeData(color: primaryColor, size: 50),
+      iconTheme: IconThemeData(color: primaryColor, size: 30),
       scaffoldBackgroundColor: Colors.transparent,
       textTheme: TextTheme(
         bodySmall: GoogleFonts.elMessiri(
@@ -18,7 +18,7 @@ class MyThemeData {
         bodyMedium: GoogleFonts.elMessiri(
           fontSize: 25,
           fontWeight: FontWeight.w700,
-          color: Color(0xFFFFFFFF),
+          color: const Color(0xFFFFFFFF),
         ),
         bodyLarge: GoogleFonts.elMessiri(
           fontSize: 30,
@@ -28,8 +28,8 @@ class MyThemeData {
       ),
       appBarTheme: AppBarTheme(
           color: Colors.transparent,
-          elevation: 0.0,
           centerTitle: true,
+          elevation: 0.0,
           iconTheme: IconThemeData(color: primaryColor)),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: blackColor,

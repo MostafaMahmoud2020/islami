@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami_application/ahadeth_model.dart';
-import 'package:islami_application/myThemeData.dart';
-import 'package:islami_application/ahadeth_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami_application/ahadeth_model.dart';
+import 'package:islami_application/ahadeth_screen.dart';
+import 'package:islami_application/myThemeData.dart';
 
 class AhadethTab extends StatefulWidget {
+  const AhadethTab({super.key});
+
   @override
   State<AhadethTab> createState() => _AhadethTabState();
 }
@@ -80,12 +82,15 @@ class _AhadethTabState extends State<AhadethTab> {
         String title = hadethOneLines[0];
         hadethOneLines.removeAt(0);
         List<String> hadethContent = hadethOneLines;
+        //you can pass hadethOneLines directly to AhadethModel instead of making a new list.
         AhadethModel ahadethModel = AhadethModel(title, hadethContent);
         allAhadeth.add(ahadethModel);
       }
-      setState(() {}); // why we use this ?
+      setState(
+          () {}); // why we use this ? Because we have a list called allahadeth which we need to add to it a new data.
+      //also  when we call this function in widget function ,when compiler saw it a futuer it skip it so we rebuild to pass data to allAhadeth
     }).catchError((e) {
-      print(e);
+      debugPrint(e.toString());
     });
 
     //setState(() {});

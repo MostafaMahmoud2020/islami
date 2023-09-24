@@ -23,7 +23,7 @@ class _SettingsTabState extends State<SettingsTab> {
                 ?.copyWith(color: MyThemeData.blackColor),
           ),
           InkWell(
-            onTap: showBottomSheet,
+            onTap: showBottomSheetLanguage,
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 5),
               width: double.infinity,
@@ -51,7 +51,7 @@ class _SettingsTabState extends State<SettingsTab> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Text(
@@ -62,7 +62,7 @@ class _SettingsTabState extends State<SettingsTab> {
                 ?.copyWith(color: MyThemeData.blackColor),
           ),
           InkWell(
-            onTap: showBottomSheet,
+            onTap: showBottomSheetAppearance,
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 5),
               width: double.infinity,
@@ -90,16 +90,43 @@ class _SettingsTabState extends State<SettingsTab> {
               ),
             ),
           ),
+          const Spacer(),
+          Center(
+            child: Text(
+              "Thanks for using us ",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: MyThemeData.primaryColor),
+              textAlign: TextAlign.center,
+            ),
+          )
         ],
       ),
     );
   }
 
-  showBottomSheet() {
+  showBottomSheetLanguage() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: OutlineInputBorder(
+      shape: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * .3,
+        );
+      },
+    );
+  }
+
+  showBottomSheetAppearance() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.transparent),
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20))),

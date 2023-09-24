@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_application/myThemeData.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SebhaTab extends StatefulWidget {
+  const SebhaTab({super.key});
+
   @override
   State<SebhaTab> createState() => _SebhaTabState();
 }
@@ -16,6 +18,7 @@ class _SebhaTabState extends State<SebhaTab> {
   double newAngle = 0;
   int index = 0;
   bool flag = false;
+  Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +31,20 @@ class _SebhaTabState extends State<SebhaTab> {
             child: Transform.rotate(
               angle: newAngle,
               child: Image.asset("assets/images/sebha_image.png",
-                  scale: 1.5, alignment: Alignment.topCenter),
+                  color: color, scale: 1.5, alignment: Alignment.topCenter),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(AppLocalizations.of(context)!.tasbehatCount,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium
                   ?.copyWith(color: MyThemeData.blackColor)),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           Visibility(
             visible: flag,
             child: Container(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: MyThemeData.primaryColor.withOpacity(0.6),
@@ -55,24 +58,24 @@ class _SebhaTabState extends State<SebhaTab> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
               decoration: BoxDecoration(
                   color: MyThemeData.primaryColor.withOpacity(0.6),
                   borderRadius: BorderRadius.circular(20)),
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               child: Text("$counter",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.notoKufiArabic(
                       color: MyThemeData.blackColor,
                       fontSize: 25,
                       fontWeight: FontWeight.bold))),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
               decoration: BoxDecoration(
                   color: MyThemeData.primaryColor.withOpacity(0.6),
                   borderRadius: BorderRadius.circular(20)),
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
               child: Text("${sebha[index]}",
                   style: GoogleFonts.notoKufiArabic(
                       color: MyThemeData.whiteColor,
@@ -93,6 +96,7 @@ class _SebhaTabState extends State<SebhaTab> {
         index = 0;
         completedCycle++;
         flag = true;
+        color = Colors.black;
       }
       setState(() {});
       return;
@@ -100,6 +104,7 @@ class _SebhaTabState extends State<SebhaTab> {
     if (completedCycle == 1) {
       flag = false;
       completedCycle = 0;
+      color = MyThemeData.primaryColor;
     }
     newAngle += 1;
     setState(() {});

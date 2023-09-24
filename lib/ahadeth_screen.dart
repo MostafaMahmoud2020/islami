@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:islami_application/ahadeth_model.dart';
 import 'package:islami_application/myThemeData.dart';
 
@@ -27,9 +26,9 @@ class AhadethScreen extends StatelessWidget {
               elevation: 50,
               shape: RoundedRectangleBorder(
                   side: BorderSide(width: 1, color: MyThemeData.primaryColor),
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
+                  borderRadius: const BorderRadius.all(Radius.circular(30))),
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       return Text(

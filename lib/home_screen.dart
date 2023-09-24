@@ -24,6 +24,29 @@ class _homeScreenState extends State<homeScreen> {
         Image.asset("assets/images/background.png",
             fit: BoxFit.fill, width: double.infinity),
         Scaffold(
+          drawer: Stack(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border.all(color: MyThemeData.primaryColor, width: 2),
+                    shape: BoxShape.circle,
+                    color: Colors.white.withAlpha(220),
+                  ),
+                  width: MediaQuery.of(context).size.width * .6,
+                  height: MediaQuery.of(context).size.height * .6,
+                  margin: EdgeInsets.all(MediaQuery.of(context).size.width / 5),
+                  child: Center(
+                    child: Text("""Developed By
+                                   Eng.Mostafa Mahmoud""",
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: MyThemeData.primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                        textAlign: TextAlign.center),
+                  )),
+            ],
+          ),
           appBar: AppBar(
             title:
                 //------------- add font manually ___________________________
@@ -32,7 +55,7 @@ class _homeScreenState extends State<homeScreen> {
                 //________________ using a package called google_fonts __________________
                 // Text("islami", style:GoogleFonts.elMessiri(fontSize: 30,color: Color(0xFF242424))),
 
-            Text(AppLocalizations.of(context)!.appTitle,
+                Text(AppLocalizations.of(context)!.appTitle,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge
@@ -46,23 +69,27 @@ class _homeScreenState extends State<homeScreen> {
               },
               items: [
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/images/quran.png")),
+                    icon:
+                        const ImageIcon(AssetImage("assets/images/quran.png")),
                     label: "Quran",
                     backgroundColor: MyThemeData.primaryColor),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/images/sebha.png")),
+                    icon:
+                        const ImageIcon(AssetImage("assets/images/sebha.png")),
                     label: "Sebah",
                     backgroundColor: MyThemeData.primaryColor),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/images/radio.png")),
+                    icon:
+                        const ImageIcon(AssetImage("assets/images/radio.png")),
                     label: "Radio",
                     backgroundColor: MyThemeData.primaryColor),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/images/ahadeth.png")),
+                    icon: const ImageIcon(
+                        AssetImage("assets/images/ahadeth.png")),
                     label: "Ahadeth",
                     backgroundColor: MyThemeData.primaryColor),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
+                    icon: const Icon(Icons.settings),
                     label: "Settings",
                     backgroundColor: MyThemeData.primaryColor),
               ]),
