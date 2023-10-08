@@ -1,45 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:islami_application/ahadeth_model.dart';
 import 'package:islami_application/myThemeData.dart';
+import 'package:islami_application/providers/my_provider.dart';
+import 'package:provider/provider.dart';
 
-class AhadethScreen extends StatefulWidget {
+class AhadethScreen extends StatelessWidget {
   static const String routeName = "AhadethScreen";
 
   @override
-  State<AhadethScreen> createState() => _AhadethScreenState();
-}
-
-class _AhadethScreenState extends State<AhadethScreen> {
-  List<String> verses = [];
-
-  @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MyProvider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as AhadethModel;
-    if (verses.isEmpty) {
-      loadFile(args.index);
-    }
 
     return Stack(
       children: [
-        Image.asset("assets/images/background.png",
+        Image.asset(provider.changeBackground(),
             fit: BoxFit.cover, width: double.infinity),
         Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Text(
+              args.title,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+          ),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
               elevation: 50,
+              color: Theme.of(context).colorScheme.background,
               shape: RoundedRectangleBorder(
                   side: BorderSide(width: 1, color: MyThemeData.primaryColor),
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
+                  borderRadius: const BorderRadius.all(Radius.circular(30))),
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       return Text(
-                        verses[index],
-                        style: Theme.of(context).textTheme.bodySmall,
+                        "${args.content[index]} (${index + 1})",
+                        textDirection: TextDirection.rtl,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(fontFamily: "DecoType Thuluth"),
                         textAlign: TextAlign.center,
                       );
                     },
@@ -48,20 +53,12 @@ class _AhadethScreenState extends State<AhadethScreen> {
                         thickness: 2,
                         endIndent: 30,
                         indent: 30),
-                    itemCount: verses.length),
+                    itemCount: args.content.length),
               ),
             ),
           ),
         ),
       ],
     );
-  }
-
-  loadFile(int index) async {
-    String file = await rootBundle
-        .loadString("assets/files/ahadeth_details/h${index + 1}.txt");
-    List<String> lines = file.split("\n");
-    verses = lines;
-    setState(() {});
   }
 }

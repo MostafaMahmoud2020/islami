@@ -1,6 +1,6 @@
 class AhadethModel {
-  //String name;
-  int index;
+  String title;
+  List<String> content;
 
-  AhadethModel(this.index);
+  AhadethModel(this.title, this.content);
 }
