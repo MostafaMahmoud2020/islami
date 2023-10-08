@@ -5,5 +5,13 @@
   "tasbehatCount": "Tasbehat count",
   "radioTitle": "Holy Quran Station",
   "language": "Language",
-  "appearance": "Appearance"
+  "appearance": "Appearance",
+  "english": "English",
+  "arabic": "Arabic",
+  "quran": "Quran",
+  "ahadeth": "Ahadeth",
+  "sebha": "Sebha",
+  "settings": "Settings",
+  "light": "Light",
+  "dark": "Dark"
 }

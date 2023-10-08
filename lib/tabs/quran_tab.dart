@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:islami_application/myThemeData.dart';
-import 'package:islami_application/sura_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami_application/sura_model.dart';
+import 'package:provider/provider.dart';
+import 'package:wave/config.dart';
+import 'package:wave/wave.dart';
+
+import '../providers/my_provider.dart';
 import '../sura_details_screen.dart';
 
 class QuranTab extends StatelessWidget {
@@ -126,6 +130,25 @@ class QuranTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MyProvider>(context);
+
+    var _backgroundColor = provider.changeColor();
+
+    var _colors = [
+      Theme.of(context).colorScheme.primary,
+      Theme.of(context).colorScheme.inversePrimary,
+    ];
+
+    const _durations = [
+      9000,
+      9000,
+    ];
+
+    const _heightPercentages = [
+      0.55,
+      0.52,
+    ];
+
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,45 +158,73 @@ class QuranTab extends StatelessWidget {
             alignment: Alignment.topCenter,
             scale: 1.4,
           ),
-          Divider(
-            thickness: 2,
-            color: MyThemeData.primaryColor,
+          SizedBox(
+            height: 10,
           ),
-          Text(
-            AppLocalizations.of(context)!.suraNames,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(color: MyThemeData.blackColor),
-          ),
-          Divider(
-            thickness: 2,
-            color: MyThemeData.primaryColor,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Divider(
+                thickness: 2,
+                color: Theme.of(context).colorScheme.onSecondary,
+                height: 2,
+              ),
+              Stack(
+                children: [
+                  WaveWidget(
+                    config: CustomConfig(
+                      colors: _colors,
+                      durations: _durations,
+                      heightPercentages: _heightPercentages,
+                    ),
+                    backgroundColor: _backgroundColor,
+                    size: Size(double.infinity,
+                        MediaQuery.of(context).size.height * .07),
+                    waveAmplitude: 10,
+                  ),
+                  Center(
+                    child: Text(
+                      AppLocalizations.of(context)!.suraNames,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary),
+                    ),
+                  ),
+                ],
+              ),
+              Divider(
+                thickness: 2,
+                height: 0,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+            ],
           ),
           Expanded(
             // here we used expanded to define height for list view
             child: ListView.separated(
               separatorBuilder: (context, index) {
                 return Divider(
-                  color: MyThemeData.primaryColor,
+                  color: Theme.of(context).colorScheme.onSecondary,
                   thickness: 1,
                   indent: 30,
                   endIndent: 30,
                 );
               },
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, SuraDetailsScreen.routeName,
-                        arguments: SuraModel(suraName[index], index));
-                  },
-                  child: Text(
-                    suraName[index],
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: MyThemeData.blackColor),
-                    textAlign: TextAlign.center,
+                return Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, SuraDetailsScreen.routeName,
+                          arguments: SuraModel(suraName[index], index));
+                    },
+                    child: Text(
+                      "(${index + 1})  -   ${suraName[index]}",
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary),
+                      textAlign: TextAlign.center,
+                      //textDirection: TextDirection.rtl,
+                    ),
                   ),
                 );
               },

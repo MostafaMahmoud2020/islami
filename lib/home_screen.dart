@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_application/myThemeData.dart';
+import 'package:islami_application/providers/my_provider.dart';
 import 'package:islami_application/tabs/ahadeth_tab.dart';
 import 'package:islami_application/tabs/quran_tab.dart';
-import 'package:islami_application/tabs/radio_tab.dart';
 import 'package:islami_application/tabs/sebha_tab.dart';
 import 'package:islami_application/tabs/settings_tab.dart';
+import 'package:provider/provider.dart';
 
 class homeScreen extends StatefulWidget {
   static const String routeName = "homeScreen";
@@ -19,9 +20,10 @@ class _homeScreenState extends State<homeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MyProvider>(context);
     return Stack(
       children: [
-        Image.asset("assets/images/background.png",
+        Image.asset(provider.changeBackground(),
             fit: BoxFit.fill, width: double.infinity),
         Scaffold(
           drawer: Stack(
@@ -31,17 +33,19 @@ class _homeScreenState extends State<homeScreen> {
                     border:
                         Border.all(color: MyThemeData.primaryColor, width: 2),
                     shape: BoxShape.circle,
-                    color: Colors.white.withAlpha(220),
+                    color: Theme.of(context).colorScheme.primary.withAlpha(220),
                   ),
                   width: MediaQuery.of(context).size.width * .6,
                   height: MediaQuery.of(context).size.height * .6,
                   margin: EdgeInsets.all(MediaQuery.of(context).size.width / 5),
                   child: Center(
-                    child: Text("""Developed By
-                                   Eng.Mostafa Mahmoud""",
+                    child: Text(
+                        """اقْرَءُوا الْقُرْآنَ فَإِنَّهُ يَأْتِي يَوْمَ الْقِيَامَةِ شَفِيعًا لأَصْحَابهِ""",
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: MyThemeData.primaryColor,
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
                               fontWeight: FontWeight.bold,
+                              letterSpacing: 1.0,
                             ),
                         textAlign: TextAlign.center),
                   )),
@@ -56,12 +60,11 @@ class _homeScreenState extends State<homeScreen> {
                 // Text("islami", style:GoogleFonts.elMessiri(fontSize: 30,color: Color(0xFF242424))),
 
                 Text(AppLocalizations.of(context)!.appTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(color: Colors.black)),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary)),
           ),
           bottomNavigationBar: BottomNavigationBar(
+              enableFeedback: true,
               currentIndex: index,
               onTap: (value) {
                 index = value;
@@ -71,27 +74,27 @@ class _homeScreenState extends State<homeScreen> {
                 BottomNavigationBarItem(
                     icon:
                         const ImageIcon(AssetImage("assets/images/quran.png")),
-                    label: "Quran",
-                    backgroundColor: MyThemeData.primaryColor),
+                    label: AppLocalizations.of(context)!.quran,
+                    backgroundColor: Theme.of(context).colorScheme.primary),
                 BottomNavigationBarItem(
                     icon:
                         const ImageIcon(AssetImage("assets/images/sebha.png")),
-                    label: "Sebah",
-                    backgroundColor: MyThemeData.primaryColor),
-                BottomNavigationBarItem(
+                    label: AppLocalizations.of(context)!.sebha,
+                    backgroundColor: Theme.of(context).colorScheme.primary),
+                /* BottomNavigationBarItem(
                     icon:
                         const ImageIcon(AssetImage("assets/images/radio.png")),
                     label: "Radio",
-                    backgroundColor: MyThemeData.primaryColor),
+                    backgroundColor: Theme.of(context).colorScheme.primary),*/
                 BottomNavigationBarItem(
                     icon: const ImageIcon(
                         AssetImage("assets/images/ahadeth.png")),
-                    label: "Ahadeth",
-                    backgroundColor: MyThemeData.primaryColor),
+                    label: AppLocalizations.of(context)!.ahadeth,
+                    backgroundColor: Theme.of(context).colorScheme.primary),
                 BottomNavigationBarItem(
                     icon: const Icon(Icons.settings),
-                    label: "Settings",
-                    backgroundColor: MyThemeData.primaryColor),
+                    label: AppLocalizations.of(context)!.settings,
+                    backgroundColor: Theme.of(context).colorScheme.primary),
               ]),
           body: tabs[index],
         ),
@@ -103,7 +106,7 @@ class _homeScreenState extends State<homeScreen> {
   List<Widget> tabs = [
     QuranTab(),
     SebhaTab(),
-    RadioTab(),
+    //RadioTab(),
     AhadethTab(),
     SettingsTab()
   ];

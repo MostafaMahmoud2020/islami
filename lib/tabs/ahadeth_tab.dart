@@ -3,7 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_application/ahadeth_model.dart';
 import 'package:islami_application/ahadeth_screen.dart';
-import 'package:islami_application/myThemeData.dart';
+import 'package:provider/provider.dart';
+import 'package:wave/config.dart';
+import 'package:wave/wave.dart';
+
+import '../providers/my_provider.dart';
 
 class AhadethTab extends StatefulWidget {
   const AhadethTab({super.key});
@@ -17,6 +21,24 @@ class _AhadethTabState extends State<AhadethTab> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MyProvider>(context);
+    var _backgroundColor = provider.changeColor();
+
+    var _colors = [
+      Theme.of(context).colorScheme.primary,
+      Theme.of(context).colorScheme.inversePrimary,
+    ];
+
+    const _durations = [
+      9000,
+      9000,
+    ];
+
+    const _heightPercentages = [
+      0.55,
+      0.52,
+    ];
+
     if (allAhadeth.isEmpty) {
       loadFile();
     }
@@ -28,20 +50,43 @@ class _AhadethTabState extends State<AhadethTab> {
             "assets/images/ahadeth_image.png",
             scale: 1.2,
           ),
-          Divider(
-            thickness: 2,
-            color: MyThemeData.primaryColor,
-          ),
-          Text(
-            AppLocalizations.of(context)!.ahadeth,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(color: MyThemeData.blackColor),
-          ),
-          Divider(
-            thickness: 2,
-            color: MyThemeData.primaryColor,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Divider(
+                thickness: 2,
+                color: Theme.of(context).colorScheme.onSecondary,
+                height: 2,
+              ),
+              Stack(
+                children: [
+                  WaveWidget(
+                    config: CustomConfig(
+                      colors: _colors,
+                      durations: _durations,
+                      heightPercentages: _heightPercentages,
+                    ),
+                    backgroundColor: _backgroundColor,
+                    size: Size(double.infinity,
+                        MediaQuery.of(context).size.height * .07),
+                    waveAmplitude: 10,
+                  ),
+                  Center(
+                    child: Text(
+                      AppLocalizations.of(context)!.ahadeth,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary),
+                    ),
+                  ),
+                ],
+              ),
+              Divider(
+                thickness: 2,
+                height: 0,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+            ],
           ),
           Expanded(
               child: ListView.separated(
@@ -54,15 +99,13 @@ class _AhadethTabState extends State<AhadethTab> {
                       child: Text(
                         allAhadeth[index].title,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: MyThemeData.blackColor),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
                       ),
                     );
                   },
                   separatorBuilder: (context, index) => Divider(
-                        color: MyThemeData.primaryColor,
+                    color: Theme.of(context).colorScheme.onSecondary,
                         thickness: 1,
                         indent: 30,
                         endIndent: 30,
